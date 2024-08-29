@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://ba0b0idd5dbh7"]
+
+[ext_resource type="Script" path="res://scenes/Potions/potions_shelf.gd" id="1_2q7vi"]
+[ext_resource type="PackedScene" uid="uid://chdd2ihvd4j68" path="res://scenes/Potions/potion_green.tscn" id="1_ten8g"]
+[ext_resource type="PackedScene" uid="uid://ggv0dmenyiqy" path="res://scenes/Potions/potion_red.tscn" id="2_3i0mb"]
+[ext_resource type="PackedScene" uid="uid://cy5sj37weulyn" path="res://scenes/Potions/potion_yellow.tscn" id="3_vefaq"]
+[ext_resource type="Texture2D" uid="uid://bebv8j24h2xg2" path="res://graphics/shelf.png" id="4_4yehd"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_2q7vi")
+
+[node name="PotionGreen" parent="." instance=ExtResource("1_ten8g")]
+position = Vector2(-268, 0)
+
+[node name="PotionRed" parent="." instance=ExtResource("2_3i0mb")]
+position = Vector2(-1, 0)
+
+[node name="PotionYellow" parent="." instance=ExtResource("3_vefaq")]
+position = Vector2(266, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-4.25, 130)
+scale = Vector2(41.1667, 0.720366)
+texture = ExtResource("4_4yehd")
+
+[connection signal="Potion_Drink" from="PotionGreen" to="." method="_on_potion_green_potion_drink"]
+[connection signal="Potion_Drink" from="PotionRed" to="." method="_on_potion_red_potion_drink"]
+[connection signal="Potion_Drink" from="PotionYellow" to="." method="_on_potion_yellow_potion_drink"]

@@ -1,0 +1,118 @@
+[gd_scene load_steps=17 format=3 uid="uid://be08m3nf5tigs"]
+
+[ext_resource type="Script" path="res://scenes/main_scene.gd" id="1_4h2ff"]
+[ext_resource type="PackedScene" uid="uid://ba0b0idd5dbh7" path="res://scenes/Potions/potions_shelf.tscn" id="1_s7wv3"]
+[ext_resource type="PackedScene" uid="uid://bhmpoonj1k4ab" path="res://scenes/Doors/door.tscn" id="2_hu75q"]
+[ext_resource type="Texture2D" uid="uid://dd2tmryw8jitn" path="res://graphics/stone-background/bg-pngs/dark-cold.png" id="2_wuh4e"]
+[ext_resource type="PackedScene" uid="uid://b8lhver4agfuj" path="res://scenes/ui/user_interface.tscn" id="3_b6idi"]
+[ext_resource type="Texture2D" uid="uid://cq4utl5w8uuo" path="res://graphics/torch-with-flame/1.png" id="5_2xv3n"]
+[ext_resource type="Texture2D" uid="uid://bamo1luuxcrm8" path="res://graphics/torch-with-flame/2.png" id="6_fgx3r"]
+[ext_resource type="Texture2D" uid="uid://c735w0qjoxsm7" path="res://graphics/torch-with-flame/3.png" id="7_6jvqk"]
+[ext_resource type="Texture2D" uid="uid://drpt2b2q7jqxs" path="res://graphics/torch-with-flame/4.png" id="8_vadjh"]
+[ext_resource type="Texture2D" uid="uid://c7xwqbpda3mj7" path="res://graphics/torch-with-flame/5.png" id="9_xau6w"]
+[ext_resource type="Texture2D" uid="uid://b2g0sjwg2bikv" path="res://graphics/torch-with-flame/6.png" id="10_kprbv"]
+[ext_resource type="AudioStream" uid="uid://cq61ulo0kg6vx" path="res://sounds/monstermoan.wav" id="12_iifnc"]
+[ext_resource type="AudioStream" uid="uid://bj50wykfbawd8" path="res://sounds/drink1.wav" id="12_padbt"]
+[ext_resource type="AudioStream" uid="uid://c2gbrb4jiqrlk" path="res://sounds/scratching.wav" id="15_115te"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w4n8y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_2xv3n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_fgx3r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_6jvqk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_vadjh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_xau6w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_kprbv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0t1ra"]
+playback_mode = 1
+streams_count = 2
+stream_0/stream = ExtResource("12_iifnc")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("15_115te")
+stream_1/weight = 1.0
+
+[node name="MainScene" type="Node2D"]
+script = ExtResource("1_4h2ff")
+metadata/_edit_vertical_guides_ = [-502.0, 501.0]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(7, 53)
+scale = Vector2(0.619303, 0.619303)
+texture = ExtResource("2_wuh4e")
+
+[node name="Potions_Shelf" parent="." instance=ExtResource("1_s7wv3")]
+position = Vector2(-1, -84)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="UserInterface" parent="Camera2D" instance=ExtResource("3_b6idi")]
+
+[node name="DoorGroup" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="DoorGroup"]
+position = Vector2(452, -535.096)
+scale = Vector2(0.344, 0.344)
+sprite_frames = SubResource("SpriteFrames_w4n8y")
+autoplay = "default"
+frame_progress = 0.748653
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="DoorGroup"]
+position = Vector2(-439, -533.096)
+scale = Vector2(0.34375, 0.34375)
+sprite_frames = SubResource("SpriteFrames_w4n8y")
+autoplay = "default"
+frame_progress = 0.350965
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="DoorGroup"]
+position = Vector2(4.00003, -532.096)
+scale = Vector2(0.344, 0.344)
+sprite_frames = SubResource("SpriteFrames_w4n8y")
+autoplay = "default"
+frame_progress = 0.700777
+
+[node name="Door_Left" parent="DoorGroup" instance=ExtResource("2_hu75q")]
+position = Vector2(-246, -475)
+
+[node name="Door_Right" parent="DoorGroup" instance=ExtResource("2_hu75q")]
+position = Vector2(273, -475)
+
+[node name="SoundEffects" type="Node" parent="."]
+
+[node name="MonsterSounds" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = SubResource("AudioStreamRandomizer_0t1ra")
+volume_db = 2.0
+
+[node name="ReplayDelay" type="Timer" parent="SoundEffects"]
+wait_time = 5.0
+one_shot = true
+
+[node name="DrinkPotion" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource("12_padbt")
+volume_db = 4.0
+
+[connection signal="Potion_Taken" from="Potions_Shelf" to="." method="_on_potions_shelf_potion_taken"]
+[connection signal="ui_listen" from="Camera2D/UserInterface" to="." method="_on_user_interface_ui_listen"]
+[connection signal="ui_look" from="Camera2D/UserInterface" to="." method="_on_user_interface_ui_look"]
+[connection signal="ui_touch" from="Camera2D/UserInterface" to="." method="_on_user_interface_ui_touch"]
+[connection signal="Door_Clicked" from="DoorGroup/Door_Left" to="." method="_on_door_left_door_clicked"]
+[connection signal="Door_Clicked" from="DoorGroup/Door_Right" to="." method="_on_door_right_door_clicked"]
+[connection signal="finished" from="SoundEffects/MonsterSounds" to="." method="_on_monster_sounds_finished"]
+[connection signal="timeout" from="SoundEffects/ReplayDelay" to="." method="_on_replay_delay_timeout"]

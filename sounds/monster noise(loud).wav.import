@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dtcuga4otgb2j"
+path="res://.godot/imported/monster noise(loud).wav-f6d3f36c6ab7dac94140fededccce353.sample"
+
+[deps]
+
+source_file="res://sounds/monster noise(loud).wav"
+dest_files=["res://.godot/imported/monster noise(loud).wav-f6d3f36c6ab7dac94140fededccce353.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://cye2jkoms1esx"]
+
+[ext_resource type="Texture2D" uid="uid://jbrgexjagiam" path="res://graphics/stone-background/bg-pngs/sepia-bg.png" id="1_ckpsj"]
+[ext_resource type="FontFile" uid="uid://bjp8s34ntffc7" path="res://graphics/fonts/Oseon-Regular.ttf" id="2_lv65m"]
+
+[node name="Credits" type="Node2D"]
+
+[node name="Sepia-bg" type="Sprite2D" parent="."]
+position = Vector2(456, 402)
+texture = ExtResource("1_ckpsj")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_right = 1151.0
+offset_bottom = 640.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_lv65m")
+theme_override_font_sizes/normal_font_size = 78
+bbcode_enabled = true
+text = "[center]Credits[/center]
+
+Game Design/Developer:
+Kyle Parrish (https://twitch.tv/codingcraftsman)
+
+Sound Effects:
+Bobby Dennis(https://twitch.tv/bobbybdennis)"

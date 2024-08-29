@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://0s633ybud83"]
+
+[ext_resource type="Script" path="res://scenes/ui/game_over.gd" id="1_pq6er"]
+[ext_resource type="Texture2D" uid="uid://jbrgexjagiam" path="res://graphics/stone-background/bg-pngs/sepia-bg.png" id="2_6gfwt"]
+[ext_resource type="FontFile" uid="uid://bjp8s34ntffc7" path="res://graphics/fonts/Oseon-Regular.ttf" id="3_7sosg"]
+
+[node name="Win" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pq6er")
+
+[node name="Sepia-bg" type="Sprite2D" parent="."]
+position = Vector2(495, 438)
+texture = ExtResource("2_6gfwt")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_right = 1151.0
+offset_bottom = 401.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_7sosg")
+theme_override_font_sizes/normal_font_size = 87
+bbcode_enabled = true
+text = "[center]You have escaped the dungeon![/center]"
+
+[node name="RestartButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 463.0
+offset_top = 499.0
+offset_right = 670.0
+offset_bottom = 593.0
+theme_override_fonts/font = ExtResource("3_7sosg")
+theme_override_font_sizes/font_size = 91
+text = "Restart"
+
+[node name="Credits" type="Button" parent="."]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 585.0
+offset_right = 109.0
+offset_bottom = 641.0
+theme_override_font_sizes/font_size = 25
+text = "Credits"
+
+[connection signal="button_up" from="RestartButton" to="." method="_on_restart_button_button_up"]
+[connection signal="button_up" from="Credits" to="." method="_on_credits_button_up"]

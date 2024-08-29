@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://dphwoli2a12f4"]
+
+[ext_resource type="Texture2D" uid="uid://m0q383crt6qt" path="res://graphics/doors/closed-wood-door.png" id="1_pgee5"]
+
+[sub_resource type="CSharpScript" id="CSharpScript_xdcaj"]
+script/source = "using Godot;
+using System;
+
+public partial class door_Right : Node2D
+{
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
+	{
+	}
+
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+	}
+}
+"
+
+[node name="Door_Left" type="Node2D"]
+script = SubResource("CSharpScript_xdcaj")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = -90.0
+offset_top = -93.0
+offset_right = 99.0
+offset_bottom = 164.0
+
+[node name="Closed-wood-door" type="Sprite2D" parent="TextureButton"]
+position = Vector2(91, 92)
+scale = Vector2(0.523, 0.523)
+texture = ExtResource("1_pgee5")
+
+[connection signal="button_up" from="TextureButton" to="." method="_on_texture_button_button_up"]
